@@ -13,3 +13,36 @@ Several authors have studied to analyze the disease and generate web tools to ca
 ## Description of Methods
 In this study, the stages based on the SEMMA methodology were performed. First, the dataset creation proceeded, from the information collected by the survey, as described in the below figure. After the dataset creation, the data have been validated, looking for missing values, atypical data, and the correlation level between variables, which is lower than 0.5, so can be sure that the stored data and the basis for the software implementation and the data mining methods are correct. Once the dataset was validated and prepared, the data mining techniques and methods were applied. 
 
+<div align="center"
+     
+![Dataset Description](images/table1.png "Dataset Description")
+     
+</div>
+
+In this study, the methods used were <b>Decision Trees, Bayesian Networks (Naïve Bayes)</b>, and <b>Logistic Regression</b>. To validate the model and selecting the best technique, the Precision metrics Recall, TP Rate, and FP Rate were used. For the training process, cross-validation was used, part of the data for training and other part for testing to guarantee optimal results and avoiding over-training issues. The proposed model considers classes or categories, the values of <i>underweight, normal, overweight, obesity level I, obesity level II</i> and <i>obesity level III</i>.
+
+## Description of Data
+The dataset was updated after the publication of this version. Before the updated version there were 712 records. After the update %67 of the data was generated synthetically by the SMOTE filter, and %33 of the data was collected directly from the survey. The dataset contains 17 attributes and 2111 records.
+
+## Expected Results in Paper
+Based on the data the technique with the best results was Decision Trees. The technique also obtained better results than the values from techniques such as Bayesian Networks and Logistic Regression.
+
+- The results for <b>Decision Trees</b>: <i>Precision:</i> 97.4%, <i>Recall:</i> 97.8%, <i>TP Rate:</i> 97.8%, <i>FP Rate:</i> 0.2%. 
+- The results for <b>Naive Baes</b>: <i>Precision:</i> 90.1%, <i>Recall:</i> 91.1%, <i>TP Rate:</i> 91.1%, <i>FP Rate:</i> 6.0%. 
+- The resulst for <b>Logistic Regression</b>: <i>Precision:</i> 90.4%, <i>Recall:</i> 91.6%, <i>TP Rate:</i> 91.6%, <i>FP Rate:</i> 4.1%. 
+
+## Preprocessing Steps
+Data set were already preprocessed by the authors as mentioned in [Description of Methods](#description-of-methods) part. But there were still some categorical features and these features were in the character format. After that to improve the article work some feature selection methods have been tried to handled and finally parameter tuning with Grid Search applied.
+
+## Results and Comparison
+Due to the dataset used in that article having been changed by applying SMOTE our results may differ from the original article. Also, some criteria haven't been mentioned in the article by authors and we tried to find the best parameter settings and also try to split training and testing data by ourselves.
+
+Our results obtained by using Decision Trees, Logistic Regression and Naive Bayes can be found below figures
+
+Results Table       |  Results Figure
+:-------------------------:|:-------------------------:
+![](images/table4.png)  |  ![](images/table5.png)
+
+
+
+
