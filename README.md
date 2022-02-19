@@ -2,7 +2,7 @@
 
 <h4 align="center">Abstract</h4>
 <p align="center">
-In this project Obesity Level Estimation Software based on Decision Trees article published by Eduardo De-La-Hoz-Correa, Fabio E. Mendoza-Palechor, Alexis De-La-Hoz-Manotas, Roberto C. Morales-Ortega and Sánchez Hernández Beatriz Adriana has been tried to replicated. Obesity has become a global epidemic that has doubled since 1980, authors handled that problem authors applied the SEMMA data mining methodology,  to select, explore and model the data set, and then three methods were selected: Decision trees, Bayesian networks (Naïve Bayes) and Logistic Regression, obtaining the best results with Decision trees based on the metrics: Precision, recall, TP Rate and FP Rate. Necessary information and the data itself can be achieved from: <a href="https://archive.ics.uci.edu/ml/datasets/Estimation+of+obesity+levels+based+on+eating+habits+and+physical+condition+">UCI Machine Learning Repository</a>
+In this project <a href="https://thescipub.com/pdf/jcssp.2019.67.77.pdf">Obesity Level Estimation Software based on Decision Trees article published by Eduardo De-La-Hoz-Correa, Fabio E. Mendoza-Palechor, Alexis De-La-Hoz-Manotas, Roberto C. Morales-Ortega and Sánchez Hernández Beatriz Adriana</a> has been tried to replicated. Obesity has become a global epidemic that has doubled since 1980, authors handled that problem authors applied the SEMMA data mining methodology,  to select, explore and model the data set, and then three methods were selected: Decision trees, Bayesian networks (Naïve Bayes) and Logistic Regression, obtaining the best results with Decision trees based on the metrics: Precision, recall, TP Rate and FP Rate. Necessary information and the data itself can be achieved from: <a href="https://archive.ics.uci.edu/ml/datasets/Estimation+of+obesity+levels+based+on+eating+habits+and+physical+condition+">UCI Machine Learning Repository</a>
 </p>
 
 ## Introduction
@@ -43,6 +43,34 @@ Results Table       |  Results Figure
 :-------------------------:|:-------------------------:
 ![](images/table4.png)  |  ![](images/table5.png)
 
+When the results compare with the original article there is a huge difference between the Naive Baes scores and Logistic Regression scores. The general scores for the Decision Tree algorithm are almost the same and very close. But these results were obtained by default parameter settings. We'll try to develop these scores in the following sections.
 
+## Feature Selection
 
+### Feature Selection in Numeric Columns
+Dataset has only three numeric columns but the feature selection algorithm still applied and tries to find if there is an unnecessary column or not. In this section ANOVA based on selection applied and numeric columns eliminated transform into one by one. But the feature selection algorithm for numeric columns didn't improve the model.
 
+### Feature Selection in Categorical Columns
+There are two popular feature selection techniques that can be used for categorical input data and a categorical (class) target variable. They are: <i>Chi-Squared Statistic</i> and <i>Mutual Information Statistic</i>. Pearson’s chi-squared statistical hypothesis test is an example of a test for independence between categorical variables. The results of this test can be used for feature selection, where those features that are independent of the target variable can be removed from the dataset. On the other hand, Mutual information from the field of information theory is the application of information gain (typically used in the construction of decision trees) to feature selection. Mutual information is calculated between two variables and measures the reduction in uncertainty for one variable given a known value of the other variable.
+
+These two popular feature selection techniques have been applied and conclude that the Mutual Information Statistic was more beneficial than the Chi-squared statistic. The categorical columns have been eliminated into three columns and obtained the best results as follows.
+
+Before Feature Selection      |  After Feature Selection
+:-------------------------:|:-------------------------:
+![](images/table4.png)  |  ![](images/table6.png)
+
+As we can see above, there is a significant improvement for the Logistic Regression and Decision Tree but on the other hand that feature selection technique negatively affected the Naive Bayes algorithm.
+
+## Model Hyperparameter Optimization
+Machine learning models have hyperparameters. Hyperparameters are points of choice or configuration that allow a machine learning model to be customized for a specific task or dataset. Machine learning models also have parameters, which are the internal coefficients set by training or optimizing the model on a training dataset. Parameters are different from hyperparameters. Parameters are learned automatically; hyperparameters are set manually to help guide the learning process.
+
+With the help of the <b>model_selection</b> library of scikit-learn, we can use the  GridSearchCV to find the best hyperparameters. GridSearchCV, evaluate models for a given hyperparameter vector using cross-validation, hence the “CV” suffix of each class name. GridSearchCV requires two arguments. The first is the model that you are optimizing. This is an instance of the model with values of hyperparameters set that you want to optimize. The second is the search space. This is defined as a dictionary where the names are the hyperparameter arguments to the model and the values are discrete values or distribution of values to sample in the case of a random search.
+
+Subsequently applying GridSearchCV for all learning algorithms we try to come up with the best hyperparameters and plot the results again. 
+
+Before GridSearch       |  After GridSearch
+:-------------------------:|:-------------------------:
+![](images/table6.png)  |  ![](images/table8.png)
+
+## Conclusion
+In conclusion, in this article authors try to predict the obesity level of a person. The dataset was almost fully preprocessed and ready for applying to necessary algorithms. After just applying the OneHotEncoding, LabelEncoding, and mapping methods for the ordinal columns data was fully preprocessed. Due to our dataset was not that large the Decision Tree proved its effect once more. In the beginning, my scores are really different from the scores in the article. One reason for that was the update on the dataset. New variables were produced by using SMOTE filter. The other reason was the feature selection and hyperparameter tuning. After dropping the relevant features we obtained better results for Logistic Regression and Decision Tree model. When we applied the GridSearchCV to find the best hyperparameters we obtained much better results than the beginning. The <b>Logistic Regression</b> model has been improved by almost %15. If there would be a clearer explanation of the article I believe that we could achieve much higher accuracy scores and improve the current algorithm better.
